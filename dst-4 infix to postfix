@@ -1,0 +1,33 @@
+def precedence(op):
+    if op=='+' or op=='-':
+        return 1
+    if op=='*' or op=='/':
+        return 2
+    return 0
+def conv(exp):
+    stack=[]
+    postfix=[]
+    for char in exp:
+        if char.isalnum():
+            postfix.append(char)
+        elif char=='(':
+            stack.append(char)
+        elif char==')':
+            while stack and stack[-1]!='(':
+                postfix.append(stack.pop())
+            stack.pop()
+        else:
+            while stack and precedence(stack[-1])>=precedence(char):
+                postfix.append(stack.pop())
+            stack.append(char)
+    while stack:
+        postfix.append(stack.pop())
+    return ' '.join(postfix)
+exp="A*(B+C)/D"
+output=conv(exp)
+print(f"Infix : {exp}\n Postfix: {output}")
+
+
+#output
+#Infix : A*(B+C)/D
+# Postfix: A B C + * D /                  
