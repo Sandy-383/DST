@@ -1,12 +1,12 @@
-ydef evaluate(exp):
+def evaluate(exp):
     stack = []
     operators = {'+', '-', '*', '/', '^'}
 
     for char in exp.split():
-        if char.isdigit():  # Push numbers onto the stack
+        if char.isdigit():  
             stack.append(int(char))
-        elif char in operators:  # Perform operation
-            if len(stack) < 2:  # Ensure there are enough operands
+        elif char in operators:  
+            if len(stack) < 2:
                 raise ValueError("Invalid expression: not enough operands for operation")
             
             a = stack.pop()
@@ -19,25 +19,38 @@ ydef evaluate(exp):
             elif char == '*':
                 stack.append(b * a)
             elif char == '/':
-                if a == 0:  # Prevent division by zero
+                if a == 0:  
                     raise ZeroDivisionError("Division by zero is not allowed")
-                stack.append(b / a)  # Result is a float
+                stack.append(b / a)
             elif char == '^':
-                stack.append(b ** a)  # Exponentiation
+                stack.append(b ** a)
         else:
             raise ValueError(f"Invalid character in expression: '{char}'")
 
-    if len(stack) != 1:  # Ensure a single result remains
+    if len(stack) != 1:
         raise ValueError("Invalid expression: leftover operands after evaluation")
     
     return stack.pop()
 
-# Test the function
+
+# Testing the function
 try:
-    result = evaluate("3 4 + 2 * 7 /")
-    print(result)
+    result1 = evaluate("3 4 + 2 * 7 /")
+    print(result1)  # Expected output: 2.0
 except (ValueError, ZeroDivisionError) as e:
     print(f"Error: {e}")
+
+try:
+    result2 = evaluate("3 4 + *")
+    print(result2)
+except (ValueError, ZeroDivisionError) as e:
+    print(f"Error: {e}")  # Expected to raise an error: not enough operands for operation
+
+
+
+
+#my code
+
 def evaluate(exp):
     stack=[]
     for char in exp:
@@ -68,8 +81,11 @@ def evaluate(exp):
             b=stack.pop()
             expo=int(b)^int(a)
             stack.append(expo)
+        
+        
         else:
             pass
+        
     return stack.pop()
 
 e=evaluate("3 4 + 2 * 7 /")
@@ -80,4 +96,4 @@ print(er)
 
 #output
 #2.0
-#Invalid expression: not enough operands for operation
+
