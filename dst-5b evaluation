@@ -1,3 +1,43 @@
+ydef evaluate(exp):
+    stack = []
+    operators = {'+', '-', '*', '/', '^'}
+
+    for char in exp.split():
+        if char.isdigit():  # Push numbers onto the stack
+            stack.append(int(char))
+        elif char in operators:  # Perform operation
+            if len(stack) < 2:  # Ensure there are enough operands
+                raise ValueError("Invalid expression: not enough operands for operation")
+            
+            a = stack.pop()
+            b = stack.pop()
+            
+            if char == '+':
+                stack.append(b + a)
+            elif char == '-':
+                stack.append(b - a)
+            elif char == '*':
+                stack.append(b * a)
+            elif char == '/':
+                if a == 0:  # Prevent division by zero
+                    raise ZeroDivisionError("Division by zero is not allowed")
+                stack.append(b / a)  # Result is a float
+            elif char == '^':
+                stack.append(b ** a)  # Exponentiation
+        else:
+            raise ValueError(f"Invalid character in expression: '{char}'")
+
+    if len(stack) != 1:  # Ensure a single result remains
+        raise ValueError("Invalid expression: leftover operands after evaluation")
+    
+    return stack.pop()
+
+# Test the function
+try:
+    result = evaluate("3 4 + 2 * 7 /")
+    print(result)
+except (ValueError, ZeroDivisionError) as e:
+    print(f"Error: {e}")
 def evaluate(exp):
     stack=[]
     for char in exp:
@@ -34,8 +74,10 @@ def evaluate(exp):
 
 e=evaluate("3 4 + 2 * 7 /")
 print(e)
-
+er=evaluate("3 4 + *")
+print(er) 
 
 
 #output
 #2.0
+#Invalid expression: not enough operands for operation
