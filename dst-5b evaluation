@@ -1,3 +1,6 @@
+#actuall code to be written
+
+
 def evaluate(exp):
     stack = []
     operators = {'+', '-', '*', '/', '^'}
@@ -46,6 +49,49 @@ try:
 except (ValueError, ZeroDivisionError) as e:
     print(f"Error: {e}")  # Expected to raise an error: not enough operands for operation
 
+
+#old code
+
+
+def evaluate(exp):
+    stack=[]
+    for char in exp:
+        if char.isdigit():
+            stack.append(int(char))
+        if char=='+':
+            a=stack.pop()
+            b=stack.pop()
+            sum1=int(a)+int(b)
+            stack.append(sum1)
+        elif char=='-':
+            a=stack.pop()
+            b=stack.pop()
+            sub=int(b)-int(a)
+            stack.append(sub)
+        elif char=='*':
+            a=stack.pop()
+            b=stack.pop()
+            mul=int(a)*int(b)
+            stack.append(mul)
+        elif char=='/':
+            a=stack.pop()
+            b=stack.pop()
+            div=int(b)/int(a)
+            stack.append(div)
+        elif char=='^':
+            a=stack.pop()
+            b=stack.pop()
+            expo=int(b)^int(a)
+            stack.append(expo)
+        
+        
+        else:
+            pass
+        
+    return stack.pop()
+
+e=evaluate("3 4 + 2 * 7 /")
+print(e)
 
 
 
