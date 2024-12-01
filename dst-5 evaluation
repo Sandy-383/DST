@@ -32,5 +32,10 @@ def evaluate(exp):
             pass
     return stack.pop()
 
-e=evaluate("A B C + * D /")
+e=evaluate("3 4 + 2 * 7 /")
 print(e)
+
+
+
+#output
+#2.0
