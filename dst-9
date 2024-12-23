@@ -1,0 +1,61 @@
+class Node:
+    def __init__(self, key):
+        self.left = None
+        self.right = None
+        self.data = key
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, key):
+        if self.root is None:
+            self.root = Node(key)
+        else:
+            self._insert(self.root, key)
+
+    def _insert(self, root, key):
+        if key < root.data:
+            if root.left is None:
+                root.left = Node(key)
+            else:
+                self._insert(root.left, key)
+        else:
+            if root.right is None:
+                root.right = Node(key)
+            else:
+                self._insert(root.right, key)
+
+    def inorder(self, root):
+        if root:
+            self.inorder(root.left)
+            print(root.data, end=" ")
+            self.inorder(root.right)
+
+    def preorder(self, root):
+        if root:
+            print(root.data, end=" ")
+            self.preorder(root.left)
+            self.preorder(root.right)
+
+    def postorder(self, root):
+        if root:
+            self.postorder(root.left)
+            self.postorder(root.right)
+            print(root.data, end=" ")
+
+# Example usage
+bst = BinarySearchTree()
+
+# Insert values into the BST
+values = [50, 30, 20, 40, 70, 60, 80]
+for value in values:
+    bst.insert(value)
+
+# Perform the traversals
+print("Inorder traversal:")
+bst.inorder(bst.root)  # Output: 20 30 40 50 60 70 80
+print("\nPreorder traversal:")
+bst.preorder(bst.root)  # Output: 50 30 20 40 70 60 80
+print("\nPostorder traversal:")
+bst.postorder(bst.root)  # Output: 20 40 30 60 80 70 50
